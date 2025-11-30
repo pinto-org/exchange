@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.20;
 
-import {ReentrancyGuardUpgradeable} from "ozu/security/ReentrancyGuardUpgradeable.sol";
+import {ReentrancyGuardUpgradeable} from "ozu/utils/ReentrancyGuardUpgradeable.sol";
 import {ERC20Upgradeable, ERC20PermitUpgradeable} from "ozu/token/ERC20/extensions/ERC20PermitUpgradeable.sol";
 import {IERC20, SafeERC20} from "oz/token/ERC20/utils/SafeERC20.sol";
 import {IWell, Call} from "src/interfaces/IWell.sol";

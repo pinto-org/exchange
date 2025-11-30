@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.20;
 
-import {ReentrancyGuard} from "oz/security/ReentrancyGuard.sol";
+import {ReentrancyGuard} from "oz/utils/ReentrancyGuard.sol";
 
 import {IAquifer} from "src/interfaces/IAquifer.sol";
 import {IWell} from "src/Well.sol";

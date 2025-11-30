@@ -7,6 +7,7 @@ import {UUPSUpgradeable} from "ozu/proxy/utils/UUPSUpgradeable.sol";
 import {OwnableUpgradeable} from "ozu/access/OwnableUpgradeable.sol";
 import {IERC20, SafeERC20} from "oz/token/ERC20/utils/SafeERC20.sol";
 import {IAquifer} from "src/interfaces/IAquifer.sol";
+import {ERC1967Utils} from "oz/proxy/ERC1967/ERC1967Utils.sol";
 
 /**
  * @title WellUpgradeable
@@ -33,7 +34,7 @@ contract WellUpgradeable is Well, UUPSUpgradeable, OwnableUpgradeable {
         __ERC20_init(_name, _symbol);
         __ReentrancyGuard_init();
         __UUPSUpgradeable_init();
-        __Ownable_init();
+        __Ownable_init(msg.sender);
 
         IERC20[] memory _tokens = tokens();
         uint256 tokensLength = _tokens.length;
@@ -68,7 +69,7 @@ contract WellUpgradeable is Well, UUPSUpgradeable, OwnableUpgradeable {
 
         // verify the function is called through an active proxy bored by an aquifer.
         address aquifer = aquifer();
-        address activeProxy = IAquifer(aquifer).wellImplementation(_getImplementation());
+        address activeProxy = IAquifer(aquifer).wellImplementation(ERC1967Utils.getImplementation());
         require(activeProxy == ___self, "Function must be called through active proxy bored by an aquifer");
 
         // verify the new implmentation is a well bored by an aquifier.
@@ -87,7 +88,7 @@ contract WellUpgradeable is Well, UUPSUpgradeable, OwnableUpgradeable {
 
         // verify the new implmentation is a valid ERC-1967 implmentation.
         require(
-            UUPSUpgradeable(newImplementation).proxiableUUID() == _IMPLEMENTATION_SLOT,
+            UUPSUpgradeable(newImplementation).proxiableUUID() == ERC1967Utils.IMPLEMENTATION_SLOT,
             "New implementation must be a valid ERC-1967 implmentation"
         );
     }
@@ -100,9 +101,9 @@ contract WellUpgradeable is Well, UUPSUpgradeable, OwnableUpgradeable {
      */
     function upgradeTo(
         address newImplementation
-    ) public override {
+    ) public {
         _authorizeUpgrade(newImplementation);
-        _upgradeToAndCallUUPS(newImplementation, new bytes(0), false);
+        ERC1967Utils.upgradeToAndCall(newImplementation, new bytes(0));
     }
 
     /**
@@ -113,7 +114,7 @@ contract WellUpgradeable is Well, UUPSUpgradeable, OwnableUpgradeable {
      */
     function upgradeToAndCall(address newImplementation, bytes memory data) public payable override {
         _authorizeUpgrade(newImplementation);
-        _upgradeToAndCallUUPS(newImplementation, data, true);
+        ERC1967Utils.upgradeToAndCall(newImplementation, data);
     }
 
     /**
@@ -126,11 +127,11 @@ contract WellUpgradeable is Well, UUPSUpgradeable, OwnableUpgradeable {
      * this specific usecase.
      */
     function proxiableUUID() public view override notDelegatedOrIsMinimalProxy returns (bytes32) {
-        return _IMPLEMENTATION_SLOT;
+        return ERC1967Utils.IMPLEMENTATION_SLOT;
     }
 
     function getImplementation() external view returns (address) {
-        return _getImplementation();
+        return ERC1967Utils.getImplementation();
     }
 
     function getVersion() external pure virtual returns (uint256) {

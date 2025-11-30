@@ -9,7 +9,7 @@ import {simCapReserve50Percent, from18, to18} from "test/pumps/PumpHelpers.sol";
 import {log2, powu, UD60x18, wrap, unwrap} from "prb/math/UD60x18.sol";
 import {exp2, log2, powu, UD60x18, wrap, unwrap, uUNIT} from "prb/math/UD60x18.sol";
 import {MockStaticWell} from "mocks/wells/MockStaticWell.sol";
-import {ReentrancyGuardUpgradeable} from "ozu/security/ReentrancyGuardUpgradeable.sol";
+import {ReentrancyGuardUpgradeable} from "ozu/utils/ReentrancyGuardUpgradeable.sol";
 import {Math} from "oz/utils/math/Math.sol";
 import "oz/utils/Strings.sol";
 
