@@ -5,6 +5,7 @@ import {IERC20, Well, Strings} from "test/TestHelper.sol";
 import {SwapHelper} from "test/SwapHelper.sol";
 import {ReentrantMockToken} from "mocks/tokens/ReentrantMockToken.sol";
 import {IWell} from "src/interfaces/IWell.sol";
+import {ReentrancyGuard} from "oz/utils/ReentrancyGuard.sol";
 
 contract WellReadOnlyReentrancyTest is SwapHelper {
     using Strings for uint256;
@@ -33,7 +34,7 @@ contract WellReadOnlyReentrancyTest is SwapHelper {
     }
 
     function _checkReadOnlyReentrancy() internal {
-        vm.expectRevert("ReentrancyGuard: reentrant call");
+        vm.expectRevert(ReentrancyGuard.ReentrancyGuardReentrantCall.selector);
         well.addLiquidity(amounts, 0, user, type(uint256).max);
     }
 

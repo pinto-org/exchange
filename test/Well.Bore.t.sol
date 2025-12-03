@@ -5,6 +5,7 @@ import {TestHelper, Well, IERC20, Call, Balances} from "test/TestHelper.sol";
 import {MockPump} from "mocks/pumps/MockPump.sol";
 import {ConstantProduct2} from "src/functions/ConstantProduct2.sol";
 import {LibClone} from "src/libraries/LibClone.sol";
+import {Initializable} from "ozu/proxy/utils/Initializable.sol";
 
 contract WellBoreTest is TestHelper {
     /// @dev Bore a 4-token Well with ConstantProduct2 & several pumps.
@@ -41,7 +42,7 @@ contract WellBoreTest is TestHelper {
     function test_initialized() public {
         assertEq(well.isInitialized(), true);
 
-        vm.expectRevert("Initializable: contract is already initialized");
+        vm.expectRevert(Initializable.InvalidInitialization.selector);
         well.init("", "");
     }
 
@@ -137,7 +138,7 @@ contract WellBoreTest is TestHelper {
         assertEq(aquifer.wellImplementation(address(_well)), wellImplementation);
         assertEq(_well.isInitialized(), true);
 
-        vm.expectRevert("Initializable: contract is already initialized");
+        vm.expectRevert(Initializable.InvalidInitialization.selector);
         _well.init("", "");
     }
 

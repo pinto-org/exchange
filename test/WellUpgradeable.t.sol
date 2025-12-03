@@ -16,6 +16,7 @@ import {MockToken} from "mocks/tokens/MockToken.sol";
 import {WellDeployer} from "script/helpers/WellDeployer.sol";
 import {ERC1967Proxy} from "oz/proxy/ERC1967/ERC1967Proxy.sol";
 import {MockWellUpgradeable} from "mocks/wells/MockWellUpgradeable.sol";
+import {OwnableUpgradeable} from "ozu/access/OwnableUpgradeable.sol";
 
 contract WellUpgradeTest is Test, WellDeployer {
     address proxyAddress;
@@ -218,7 +219,7 @@ contract WellUpgradeTest is Test, WellDeployer {
         vm.startPrank(notOwner);
         WellUpgradeable proxy = WellUpgradeable(payable(proxyAddress));
         // expect revert
-        vm.expectRevert("Ownable: caller is not the owner");
+        vm.expectRevert(abi.encodeWithSelector(OwnableUpgradeable.OwnableUnauthorizedAccount.selector, notOwner));
         proxy.upgradeTo(address(well2));
         vm.stopPrank();
     }

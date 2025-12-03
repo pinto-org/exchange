@@ -58,20 +58,18 @@ contract LookupTableTest is TestHelper {
         pd = lookupTable.getRatiosFromPriceSwap(currentPrice);
     }
 
-    function testFail_getRatiosFromPriceSwapExtremeLow() public {
+    function test_RevertWhen_getRatiosFromPriceSwapExtremeLow() public {
         // pick an out of bounds value (P<0.01)
         uint256 currentPrice = 0.0001e6;
+        vm.expectRevert();
         pd = lookupTable.getRatiosFromPriceSwap(currentPrice);
-        // assert no revert
-        assert(pd.highPrice > pd.lowPrice);
     }
 
-    function testFail_getRatiosFromPriceSwapExtremeHigh() public {
+    function test_RevertWhen_getRatiosFromPriceSwapExtremeHigh() public {
         // pick an out of bounds value (P>10)
         uint256 currentPrice = 100e6;
+        vm.expectRevert();
         pd = lookupTable.getRatiosFromPriceSwap(currentPrice);
-        // assert no revert
-        assert(pd.highPrice > pd.lowPrice);
     }
 
     //////////////// getRatiosFromPriceLiquidity ////////////////
@@ -117,15 +115,17 @@ contract LookupTableTest is TestHelper {
         assert(pd.highPrice > pd.lowPrice);
     }
 
-    function testFail_getRatiosFromPriceLiquidityExtremeLow() public {
+    function test_RevertWhen_getRatiosFromPriceLiquidityExtremeLow() public {
         // pick an out of bounds value (P<0.01)
         uint256 currentPrice = 0.00001e6;
+        vm.expectRevert();
         pd = lookupTable.getRatiosFromPriceLiquidity(currentPrice);
     }
 
-    function testFail_getRatiosFromPriceLiquidityExtremeHigh() public {
+    function test_RevertWhen_getRatiosFromPriceLiquidityExtremeHigh() public {
         // pick an out of bounds value (P>10)
         uint256 currentPrice = 100e6;
+        vm.expectRevert();
         pd = lookupTable.getRatiosFromPriceLiquidity(currentPrice);
     }
 
