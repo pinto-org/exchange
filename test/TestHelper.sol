@@ -341,39 +341,39 @@ abstract contract TestHelper is Test, WellDeployer {
 
     //////////// Assertions ////////////
 
-    function assertEq(IERC20 a, IERC20 b) internal pure {
+    function assertEq(IERC20 a, IERC20 b) internal {
         assertEq(a, b, "Address mismatch");
     }
 
-    function assertEq(IERC20 a, IERC20 b, string memory err) internal pure {
+    function assertEq(IERC20 a, IERC20 b, string memory err) internal {
         assertEq(address(a), address(b), err);
     }
 
-    function assertEq(IERC20[] memory a, IERC20[] memory b) internal pure {
+    function assertEq(IERC20[] memory a, IERC20[] memory b) internal {
         assertEq(a, b, "IERC20[] mismatch");
     }
 
-    function assertEq(IERC20[] memory a, IERC20[] memory b, string memory err) internal pure {
+    function assertEq(IERC20[] memory a, IERC20[] memory b, string memory err) internal {
         assertEq(a.length, b.length, err);
         for (uint256 i; i < a.length; i++) {
             assertEq(a[i], b[i], err); // uses the prev overload
         }
     }
 
-    function assertEq(Call memory a, Call memory b) internal pure {
+    function assertEq(Call memory a, Call memory b) internal {
         assertEq(a, b, "Call mismatch");
     }
 
-    function assertEq(Call memory a, Call memory b, string memory err) internal pure {
+    function assertEq(Call memory a, Call memory b, string memory err) internal {
         assertEq(a.target, b.target, err);
         assertEq(a.data, b.data, err);
     }
 
-    function assertEq(Call[] memory a, Call[] memory b) internal pure {
+    function assertEq(Call[] memory a, Call[] memory b) internal {
         assertEq(a, b, "Call[] mismatch");
     }
 
-    function assertEq(Call[] memory a, Call[] memory b, string memory err) internal pure {
+    function assertEq(Call[] memory a, Call[] memory b, string memory err) internal {
         assertEq(a.length, b.length, err);
         for (uint256 i; i < a.length; i++) {
             assertEq(a[i], b[i], err); // uses the prev overload
@@ -384,7 +384,7 @@ abstract contract TestHelper is Test, WellDeployer {
         assertApproxEqRelN(a, b, 1, precision);
     }
 
-    function assertApproxLeRelN(uint256 a, uint256 b, uint256 precision, uint256 absoluteError) internal pure {
+    function assertApproxLeRelN(uint256 a, uint256 b, uint256 precision, uint256 absoluteError) internal {
         console.log("A: %s", a);
         console.log("B: %s", b);
         console.log(precision);
@@ -405,7 +405,7 @@ abstract contract TestHelper is Test, WellDeployer {
         }
     }
 
-    function assertApproxGeRelN(uint256 a, uint256 b, uint256 precision, uint256 absoluteError) internal pure {
+    function assertApproxGeRelN(uint256 a, uint256 b, uint256 precision, uint256 absoluteError) internal {
         console.log("A: %s", a);
         console.log("B: %s", b);
         console.log(precision);
@@ -460,7 +460,7 @@ abstract contract TestHelper is Test, WellDeployer {
 
     function checkInvariant(
         address _well
-    ) internal view {
+    ) internal {
         uint256[] memory _reserves = IWell(_well).getReserves();
         Call memory _wellFunction = IWell(_well).wellFunction();
         assertLe(
@@ -472,7 +472,7 @@ abstract contract TestHelper is Test, WellDeployer {
 
     function checkStableSwapInvariant(
         address _well
-    ) internal view {
+    ) internal {
         uint256[] memory _reserves = IWell(_well).getReserves();
         Call memory _wellFunction = IWell(_well).wellFunction();
         assertApproxEqAbs(

@@ -72,14 +72,14 @@ contract ABDKTest is TestHelper {
 
     function testFuzz_FromUIntToLog2(
         uint256 x
-    ) public pure {
+    ) public {
         x = bound(x, 1, type(uint256).max);
         assertEq(ABDKMathQuad.fromUInt(x).log_2(), ABDKMathQuad.fromUIntToLog2(x));
     }
 
     function testFuzz_pow_2ToUInt(
         uint256 x
-    ) public pure {
+    ) public {
         x = bound(x, 0, 255);
 
         // test the pow_2ToUInt function

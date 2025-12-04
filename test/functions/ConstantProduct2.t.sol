@@ -186,7 +186,7 @@ contract ConstantProduct2Test is WellFunctionHelper {
         assertEq(_function.calcRate(reserves, 1, 0, _data), reserves[1] * 1e18 / reserves[0]);
     }
 
-    function test_calcRate_infinite() public view {
+    function test_calcRate_infinite() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = type(uint256).max;
         reserves[1] = type(uint256).max;

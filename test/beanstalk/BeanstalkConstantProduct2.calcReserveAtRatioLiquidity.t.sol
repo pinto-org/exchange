@@ -121,7 +121,7 @@ contract BeanstalkConstantProduct2LiquidityTest is TestHelper {
         _f.calcReserveAtRatioLiquidity(reserves, 2, ratios, "");
     }
 
-    function test_calcReserveAtRatioLiquidity_infinite() public view {
+    function test_calcReserveAtRatioLiquidity_infinite() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = type(uint256).max;
         reserves[1] = type(uint256).max;

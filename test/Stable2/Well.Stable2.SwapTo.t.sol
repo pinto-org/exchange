@@ -14,7 +14,7 @@ contract WellStable2SwapToTest is SwapHelper {
         setupStable2Well();
     }
 
-    function test_getSwapIn() public view {
+    function test_getSwapIn() public {
         uint256 amountOut = 100 * 1e18;
         uint256 amountIn = well.getSwapIn(tokens[0], tokens[1], amountOut);
         assertEq(amountIn, 103_464_719_546_263_310_322); // ~3% slippage

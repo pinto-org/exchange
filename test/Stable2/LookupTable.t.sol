@@ -15,7 +15,7 @@ contract LookupTableTest is TestHelper {
         lookupTable = new Stable2LUT1();
     }
 
-    function test_getAParameter() public view {
+    function test_getAParameter() public {
         uint256 a = lookupTable.getAParameter();
         assertEq(a , 100);
     }

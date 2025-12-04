@@ -28,11 +28,11 @@ contract WellStable2BoreTest is TestHelper {
         assertEq(well.pumps(), pumps);
     }
 
-    function test_wellData() public view {
+    function test_wellData() public {
         assertEq(well.wellData(), wellData);
     }
 
-    function test_aquifer() public view {
+    function test_aquifer() public {
         assertEq(well.aquifer(), address(aquifer));
     }
 
@@ -52,21 +52,21 @@ contract WellStable2BoreTest is TestHelper {
         assertEq(_aquifer, address(aquifer));
     }
 
-    function test_getReserves() public view {
+    function test_getReserves() public {
         assertEq(well.getReserves(), getBalances(address(well), well).tokens);
     }
 
     //////////// ERC20 LP Token ////////////
 
-    function test_name() public view {
+    function test_name() public {
         assertEq(well.name(), "TOKEN0:TOKEN1 Stable2 Well");
     }
 
-    function test_symbol() public view {
+    function test_symbol() public {
         assertEq(well.symbol(), "TOKEN0TOKEN1S2w");
     }
 
-    function test_decimals() public view {
+    function test_decimals() public {
         assertEq(well.decimals(), 18);
     }
 

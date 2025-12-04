@@ -355,7 +355,7 @@ contract PumpUpdateTest is TestHelper, MultiFlowPump {
     /**
      * @notice test the internal `_capRates` function, and verify the reserves return 0.
      */
-    function test_internal_capRates() public view {
+    function test_internal_capRates() public {
         uint256[] memory lastReserves = new uint256[](2);
         uint256[] memory reserves = new uint256[](2);
         bytes16[][] memory maxRateChanges = new bytes16[][](2);
@@ -378,7 +378,7 @@ contract PumpUpdateTest is TestHelper, MultiFlowPump {
      * @notice test the internal `_capLpTokenSupply` function, and verify the reserves return 0 when
      * 'tryCalcLpTokenSupply` fails.
      */
-    function test_internal_capLpTokenSupply() public view {
+    function test_internal_capLpTokenSupply() public {
         uint256[] memory lastReserves = new uint256[](2);
         lastReserves[0] = 1e6;
         lastReserves[1] = 1e6;
