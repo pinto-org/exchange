@@ -20,7 +20,7 @@ contract ReentrantMockToken is MockToken {
         callData = _callData;
     }
 
-    function _beforeTokenTransfer(address, address, uint256) internal virtual {
+    function _update(address from, address to, uint256 value) internal virtual override {
         if (target != address(0)) {
             (bool success, bytes memory data) = target.call(callData);
             if (!success) {
@@ -30,5 +30,6 @@ contract ReentrantMockToken is MockToken {
                 }
             }
         }
+        super._update(from, to, value);
     }
 }

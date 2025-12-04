@@ -884,8 +884,9 @@ contract Well is ERC20PermitUpgradeable, IWell, IWellErrors, ReentrancyGuardUpgr
      * @dev Reverts if the reentrncy guard has been entered.
      */
     modifier readOnlyNonReentrant() {
-        // Use the same error as `ReentrancyGuardUpgradeable` instead of using a custom error for consistency.
-        require(!_reentrancyGuardEntered(), "ReentrancyGuard: reentrant call");
+        if (_reentrancyGuardEntered()) {
+            revert ReentrancyGuardReentrantCall();
+        }
         _;
     }
 }
