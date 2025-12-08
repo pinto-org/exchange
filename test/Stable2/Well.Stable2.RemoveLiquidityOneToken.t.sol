@@ -24,7 +24,7 @@ contract WellStable2RemoveLiquidityOneTokenTest is TestHelper {
     }
 
     /// @dev Assumes use of Stable2
-    function test_getRemoveLiquidityOneTokenOut() public view {
+    function test_getRemoveLiquidityOneTokenOut() public {
         uint256 amountOut = well.getRemoveLiquidityOneTokenOut(500 * 1e18, tokens[0]);
         assertEq(amountOut, 488_542_119_171_820_114_601, "incorrect tokenOut");
     }

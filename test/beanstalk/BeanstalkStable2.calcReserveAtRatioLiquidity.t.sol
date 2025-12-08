@@ -20,7 +20,7 @@ contract BeanstalkStable2LiquidityTest is TestHelper {
         data = abi.encode(18, 18);
     }
 
-    function test_calcReserveAtRatioLiquidity_equal_equal() public view {
+    function test_calcReserveAtRatioLiquidity_equal_equal() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = 100e18;
         reserves[1] = 100e18;
@@ -35,7 +35,7 @@ contract BeanstalkStable2LiquidityTest is TestHelper {
         assertApproxEqRel(reserve1, 100.002494212050875384e18, 0.0003e18);
     }
 
-    function test_calcReserveAtRatioLiquidity_equal_diff() public view {
+    function test_calcReserveAtRatioLiquidity_equal_diff() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = 50e18;
         reserves[1] = 100e18;
@@ -50,7 +50,7 @@ contract BeanstalkStable2LiquidityTest is TestHelper {
         assertApproxEqRel(reserve1, 50.001091026498328056e18, 0.0003e18);
     }
 
-    function test_calcReserveAtRatioLiquidity_diff_equal() public view {
+    function test_calcReserveAtRatioLiquidity_diff_equal() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = 1e18;
         reserves[1] = 1e18;
@@ -65,7 +65,7 @@ contract BeanstalkStable2LiquidityTest is TestHelper {
         assertApproxEqRel(reserve1, 0.21852354514449462e18, 0.0001e18);
     }
 
-    function test_calcReserveAtRatioLiquidity_diff_diff() public view {
+    function test_calcReserveAtRatioLiquidity_diff_diff() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = 2e18;
         reserves[1] = 1e18;
@@ -80,7 +80,7 @@ contract BeanstalkStable2LiquidityTest is TestHelper {
         assertApproxEqRel(reserve1, 1.18623685249742594e18, 0.0004e18);
     }
 
-    function test_calcReserveAtRatioLiquidity_fuzz(uint256[2] memory reserves, uint256[2] memory ratios) public view {
+    function test_calcReserveAtRatioLiquidity_fuzz(uint256[2] memory reserves, uint256[2] memory ratios) public {
         for (uint256 i; i < 2; ++i) {
             // Upper bound is limited by stableSwap,
             // due to the stableswap reserves being extremely far apart.
@@ -122,7 +122,7 @@ contract BeanstalkStable2LiquidityTest is TestHelper {
         _f.calcReserveAtRatioLiquidity(reserves, 2, ratios, "");
     }
 
-    function test_calcReserveAtRatioLiquidityExtreme() public view {
+    function test_calcReserveAtRatioLiquidityExtreme() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = 1e18;
         reserves[1] = 1e18;

@@ -13,7 +13,7 @@ contract WellStable2SwapFromTest is SwapHelper {
         setupStable2Well();
     }
 
-    function test_getSwapOut() public view {
+    function test_getSwapOut() public {
         uint256 amountIn = 10 * 1e18;
         uint256 amountOut = well.getSwapOut(tokens[0], tokens[1], amountIn);
 

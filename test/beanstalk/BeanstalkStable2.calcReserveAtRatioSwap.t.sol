@@ -19,7 +19,7 @@ contract BeanstalkStable2SwapTest is TestHelper {
         data = abi.encode(18, 18);
     }
 
-    function test_calcReserveAtRatioSwap_equal_equal() public view {
+    function test_calcReserveAtRatioSwap_equal_equal() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = 100e18;
         reserves[1] = 100e18;
@@ -34,7 +34,7 @@ contract BeanstalkStable2SwapTest is TestHelper {
         assertEq(reserve1, 99.999921040536083478e18);
     }
 
-    function test_calcReserveAtRatioSwap_equal_diff() public view {
+    function test_calcReserveAtRatioSwap_equal_diff() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = 50e18;
         reserves[1] = 100e18;
@@ -49,7 +49,7 @@ contract BeanstalkStable2SwapTest is TestHelper {
         assertEq(reserve1, 73.513867858788351572e18);
     }
 
-    function test_calcReserveAtRatioSwap_diff_equal() public view {
+    function test_calcReserveAtRatioSwap_diff_equal() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = 100e18;
         reserves[1] = 100e18;
@@ -64,7 +64,7 @@ contract BeanstalkStable2SwapTest is TestHelper {
         assertEq(reserve1, 39.474244037189430513e18); // 100e18, 39.475055811844664131e18
     }
 
-    function test_calcReserveAtRatioSwap_diff_diff() public view {
+    function test_calcReserveAtRatioSwap_diff_diff() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = 90e18;
         reserves[1] = 110e18;
@@ -79,7 +79,7 @@ contract BeanstalkStable2SwapTest is TestHelper {
         assertEq(reserve1, 73.11634314279891828e18); // 110e18, 73.116252343760233529e18
     }
 
-    function test_calcReserveAtRatioSwap_fuzz(uint256[2] memory reserves, uint256[2] memory ratios) public view {
+    function test_calcReserveAtRatioSwap_fuzz(uint256[2] memory reserves, uint256[2] memory ratios) public {
         for (uint256 i; i < 2; ++i) {
             // Upper bound is limited by stableSwap,
             // due to the stableswap reserves being extremely far apart.
@@ -111,7 +111,7 @@ contract BeanstalkStable2SwapTest is TestHelper {
     /**
      * @notice verifies calcReserveAtRatioSwapExtreme works in the extreme ranges.
      */
-    function test_calcReserveAtRatioSwapExtreme() public view {
+    function test_calcReserveAtRatioSwapExtreme() public {
         uint256[] memory reserves = new uint256[](2);
         reserves[0] = 1e18;
         reserves[1] = 1e18;

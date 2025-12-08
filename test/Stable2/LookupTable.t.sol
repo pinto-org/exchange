@@ -15,7 +15,7 @@ contract LookupTableTest is TestHelper {
         lookupTable = new Stable2LUT1();
     }
 
-    function test_getAParameter() public view {
+    function test_getAParameter() public {
         uint256 a = lookupTable.getAParameter();
         assertEq(a , 100);
     }
@@ -58,20 +58,18 @@ contract LookupTableTest is TestHelper {
         pd = lookupTable.getRatiosFromPriceSwap(currentPrice);
     }
 
-    function testFail_getRatiosFromPriceSwapExtremeLow() public {
+    function test_revert_getRatiosFromPriceSwapExtremeLow() public {
         // pick an out of bounds value (P<0.01)
         uint256 currentPrice = 0.0001e6;
+        vm.expectRevert();
         pd = lookupTable.getRatiosFromPriceSwap(currentPrice);
-        // assert no revert
-        assert(pd.highPrice > pd.lowPrice);
     }
 
-    function testFail_getRatiosFromPriceSwapExtremeHigh() public {
+    function test_revert_getRatiosFromPriceSwapExtremeHigh() public {
         // pick an out of bounds value (P>10)
         uint256 currentPrice = 100e6;
+        vm.expectRevert();
         pd = lookupTable.getRatiosFromPriceSwap(currentPrice);
-        // assert no revert
-        assert(pd.highPrice > pd.lowPrice);
     }
 
     //////////////// getRatiosFromPriceLiquidity ////////////////
@@ -117,15 +115,17 @@ contract LookupTableTest is TestHelper {
         assert(pd.highPrice > pd.lowPrice);
     }
 
-    function testFail_getRatiosFromPriceLiquidityExtremeLow() public {
+    function test_revert_getRatiosFromPriceLiquidityExtremeLow() public {
         // pick an out of bounds value (P<0.01)
         uint256 currentPrice = 0.00001e6;
+        vm.expectRevert();
         pd = lookupTable.getRatiosFromPriceLiquidity(currentPrice);
     }
 
-    function testFail_getRatiosFromPriceLiquidityExtremeHigh() public {
+    function test_revert_getRatiosFromPriceLiquidityExtremeHigh() public {
         // pick an out of bounds value (P>10)
         uint256 currentPrice = 100e6;
+        vm.expectRevert();
         pd = lookupTable.getRatiosFromPriceLiquidity(currentPrice);
     }
 

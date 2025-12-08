@@ -49,7 +49,7 @@ contract Stable2Test is WellFunctionHelper {
         _function = IMultiFlowPumpWellFunction(new Stable2(lut));
     }
 
-    function test_metadata() public view {
+    function test_metadata() public {
         assertEq(_function.name(), "Stable2");
         assertEq(_function.symbol(), "S2");
     }

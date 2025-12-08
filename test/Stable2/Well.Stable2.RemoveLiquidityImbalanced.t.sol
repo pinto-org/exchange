@@ -34,7 +34,7 @@ contract WellStable2RemoveLiquidityImbalancedTest is TestHelper {
     }
 
     /// @dev Assumes use of ConstantProduct2
-    function test_getRemoveLiquidityImbalancedIn() public view {
+    function test_getRemoveLiquidityImbalancedIn() public {
         uint256 lpAmountIn = well.getRemoveLiquidityImbalancedIn(tokenAmountsOut);
         assertEq(lpAmountIn, requiredLpAmountIn);
     }

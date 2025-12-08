@@ -14,7 +14,7 @@ contract WellStable2AddLiquidityTest is LiquidityHelper {
 
     /// @dev Liquidity is initially added in {TestHelper}; ensure that subsequent
     /// tests will run correctly.
-    function test_liquidityInitialized() public view {
+    function test_liquidityInitialized() public {
         IERC20[] memory tokens = well.tokens();
         Balances memory userBalance = getBalances(user, well);
         Balances memory wellBalance = getBalances(address(well), well);
@@ -26,7 +26,7 @@ contract WellStable2AddLiquidityTest is LiquidityHelper {
 
     /// @dev Adding liquidity in equal proportions should summate and be scaled
     /// up by sqrt(ConstantProduct2.EXP_PRECISION)
-    function test_getAddLiquidityOut_equalAmounts() public view {
+    function test_getAddLiquidityOut_equalAmounts() public {
         uint256[] memory amounts = new uint256[](tokens.length);
         for (uint256 i; i < tokens.length; i++) {
             amounts[i] = 1000 * 1e18;
@@ -35,7 +35,7 @@ contract WellStable2AddLiquidityTest is LiquidityHelper {
         assertEq(lpAmountOut, well.totalSupply(), "Incorrect AmountOut");
     }
 
-    function test_getAddLiquidityOut_oneToken() public view {
+    function test_getAddLiquidityOut_oneToken() public {
         uint256[] memory amounts = new uint256[](2);
         amounts[0] = 10 * 1e18;
         amounts[1] = 0;
